@@ -72,5 +72,26 @@ else
         local package = args[2]
         local branch = args[3] or "main"
         install(package,branch)
+    elseif args[1] == "remove" then
+        local pkg = args[2]
+        local packages = require ".ccpac.CraftOS"
+        if packages[pkg] then
+            local p = packages[pkg]
+            if p.pt == "file" then
+                if fs.exists("/ccpac/"..p.filename) then
+                    fs.delete("/ccpac/"..p.filename)
+                else
+                    print(("Package %s is not installed"):format(pkg))
+                end
+            elseif p.pt == "dim" then
+                if fs.exists("/ccpac/"..pkg) then
+                    fs.delete("/ccpac/"..pkg)
+                else
+                    print(("Package %s is not installed"):format(pkg))
+                end
+            end
+        else
+            print(("Package %s does not exist"):format(pkg))
+        end
     end
 end
