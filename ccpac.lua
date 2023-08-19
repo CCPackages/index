@@ -8,12 +8,12 @@ local function file(repo,filename)
     end
     f.write(request.readAll())
     f.close()
-    print(("\x1B[92mPackage %s Installed"):format(filename))
+    print(("Package %s Installed"):format(filename))
 
 end
 local function dim(repo,name)
     if not fs.exists("/ccpac/dim.lua") then
-        print(("\x1B[31mPackage dim missing...\n\tDownloading..."):format(name))
+        print(("Package dim missing...\n\tDownloading..."):format(name))
         local packages = require ".ccpac.CraftOS"
         local P = packages.dim
         local Repo = P.loc:format("main")
@@ -27,7 +27,7 @@ local function dim(repo,name)
     end
     f.write(request.readAll())
     f.close()
-    print(("\x1B[96mPackage %s Downloaded"):format(name))
+    print(("Package %s Downloaded"):format(name))
     local Dim = require ".ccpac.dim"
     local Dd = Dim.file:new("/ccpac/tmp.dim")
     if not fs.exists("/ccpac/"..name) then
@@ -35,7 +35,7 @@ local function dim(repo,name)
     end
     Dd:save("/ccpac/"..name,2)
     fs.delete("/ccpac/tmp.dim")
-    print(("\x1B[92mPackage %s Installed"):format(name))
+    print(("Package %s Installed"):format(name))
 
 end
 local function install(pkg,br)
@@ -50,7 +50,7 @@ local function install(pkg,br)
             dim(repo,pkg)
         end
     else
-        print(("\x1B[31mPackage %s does not exist"):format(pkg))
+        print(("Package %s does not exist"):format(pkg))
     end
 end
 if #args == 0 then
